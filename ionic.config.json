@@ -1,0 +1,8 @@
+{
+  "name": "dentist-appointment",
+  "app_id": "98dcc61d",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
