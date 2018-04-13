@@ -1,0 +1,1 @@
+export const APPOINTMENT_LIST_PAGE = 'AppointmentListPage'
