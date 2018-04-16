@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthGuard } from '../../auth/auth.guard';
+import { Observable } from '@firebase/util';
 
-/**
- * Generated class for the AppointmentListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +11,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AppointmentListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private guard: AuthGuard
+  ) {
+    console.log(this.guard.isLoggedIn)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AppointmentListPage');
+    console.log('logged in')
+  }
+
+  ionViewCanEnter(): boolean {
+   return this.guard.isLoggedIn
   }
 
 }

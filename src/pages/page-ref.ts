@@ -1,1 +1,5 @@
 export const APPOINTMENT_LIST_PAGE = 'AppointmentListPage'
+export const PHONE_LOGIN_PAGE = 'PhoneLoginPage'
+export const PHONE_OTP_PAGE = 'PhoneOtpPage'
+export const PHONE_USER_PROFILE = 'UserProfilePage'
+export const ADD_BOOK = 'ServiceListPage'

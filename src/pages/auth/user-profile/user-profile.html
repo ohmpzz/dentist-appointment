@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ข้อมูลส่วนตัว</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="add()" [formGroup]="profileForm" novalidate>
+    <ion-item>
+      <ion-label color="dark" stacked>ชื่อ-นามสกุล
+        <span style="color: red">'*'</span>
+      </ion-label>
+      <ion-input type="text" formControlName="fullname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark" stacked>วันเดือนปีเกิด
+        <span style="color: red">'*'</span>
+      </ion-label>
+      <ion-datetime displayFormat="DD-MM-YYYY" formControlName="birthday"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark" stacked>ที่อยู่</ion-label>
+      <ion-textarea type="text" formControlName="address"></ion-textarea>
+    </ion-item>
+    <button type="submit" [disabled]="profileForm.invalid" ion-button full>บันทึก</button>
+  </form>
+</ion-content>

@@ -32,7 +32,7 @@ export class BookingCoreProvider {
   }
 
   getProviders() {
-    const itemsRef = this.afsRef._providerRef
+    const itemsRef = this.afsRef._providersRef
     return itemsRef.snapshotChanges()
       .pipe(
         map(actions => {

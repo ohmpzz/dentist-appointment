@@ -1,0 +1,52 @@
+<ion-header >
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <div >
+
+  </div>
+  <ion-item >
+    <button ion-button (click)="onActionBtn(true)">Sign In</button>
+    <button ion-button (click)="onActionBtn(false)">Sign Up</button>
+  </ion-item>
+
+  <div *ngIf="isSignIn">
+    <form [formGroup]="signInForm" novalidate>
+      <ion-item>
+        <ion-label color="primary" floating>Phone Number</ion-label>
+        <ion-input formControlName="phoneNumber"></ion-input>
+      </ion-item>
+      <div *ngIf="isSignInInvalid">
+        <p>sadasd</p>
+      </div>
+      <div *ngIf="!!signInMsg">
+        {{signInMsg}}
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!isSignIn">
+    <form [formGroup]="signUpForm" novalidate>
+      <ion-item>
+        <ion-label color="dark" stacked>Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" stacked>Phone</ion-label>
+        <ion-input formControlName="phoneNumber"></ion-input>
+      </ion-item>
+      <div *ngIf="!!signUpMsg">
+        {{signUpMsg}}
+      </div>
+    </form>
+  </div>  
+  <button id="sign-in-button" ion-button >{{actionName}}</button>  
+  <button ion-button  (click)="test()">test</button>
+
+</ion-content>
