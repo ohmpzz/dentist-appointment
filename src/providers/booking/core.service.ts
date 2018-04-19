@@ -64,6 +64,8 @@ export class BookingCoreProvider {
 
   private prepareAddBook(book: Book) {
     const prepare: Book = {
+      service: book.service,
+      status: book.status,
       cost: book.cost,
       creationTime: firebase.firestore.FieldValue.serverTimestamp(),
       duration: book.duration,
