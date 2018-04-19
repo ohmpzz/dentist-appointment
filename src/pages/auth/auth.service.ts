@@ -1,9 +1,9 @@
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ApplicationVerifier } from '@firebase/auth-types';
 import { AngularFirestore} from 'angularfire2/firestore';
-import { AddCustomer, Customer } from '../../models/patient';
+import { AddCustomer, Customer, CustomerId } from '../../models/patient';
 import * as firebase from 'firebase';
 
 

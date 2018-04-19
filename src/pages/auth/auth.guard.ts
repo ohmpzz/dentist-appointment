@@ -4,24 +4,24 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map, take } from 'rxjs/operators';
 
+import {} from '../auth/auth.service';
+
 @Injectable()
 export class AuthGuard {
   private _authState: any
+  private _userInfo: any
 
   constructor(private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(auth => {
-      console.log('User Auth ', auth)
       this._authState = auth
     })
   }
 
   set setAuthen(auth) {
-    console.log('set ', auth)
     this._authState = auth
   }
 
   get isLoggedIn(): boolean {
-    console.log('get ', this._authState)
     return !!this._authState
   }
 
@@ -34,8 +34,9 @@ export class AuthGuard {
   }
 
   get currentUserId(): string {
-    return this.isLoggedIn ? this._authState.uid : ''
+    return this.isLoggedIn ? this._authState['uid'] : ''
   }
+
 
   public signOut() {
     return this.afAuth.auth.signOut()
