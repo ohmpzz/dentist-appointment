@@ -1,26 +1,45 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { Book } from '../../models/book';
-import { DatabaseRef } from '../../models/afs-ref';
+import { ProviderId } from '../../models/provider';
+import { CustomerId, Customer } from '../../models/patient';
+import { Service, ServiceId } from '../../models/service';
+
 
 @Injectable()
 export class BookingCoreProvider {
+  private readonly _servicesRef = this.afs.doc('services/serviceInfo').collection<ServiceId>('services')
+  private readonly _appointmentsRef = this.afs.doc('appointments/appointmentInfo').collection('books')
+  private readonly _providersRef = this.afs.doc('providers/providerInfo').collection<ProviderId>('providers')
+  private readonly _patientsRef = this.afs.doc('patients/patientInfo').collection('patients') 
 
-  constructor(private afs: AngularFirestore, private afsRef: DatabaseRef) {
+  constructor(private afs: AngularFirestore) {
   }
 
   addBooking(book: Book) {
-    const itemRef = this.afsRef._appointmentRef
+    const itemRef: AngularFirestoreCollection<any> = this._appointmentsRef
     const prepare: Book = this.prepareAddBook(book)
     return itemRef.add(prepare)
   }
 
   getServices() {
-    const itemsRef = this.afsRef._servicesRef
+    const itemsRef: AngularFirestoreCollection<any> = this._servicesRef
+    return itemsRef.snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            return {id: a.payload.doc.id, ...a.payload.doc.data() as Service}
+          })
+        })
+      )
+  }
+
+  getProviders() {
+    const itemsRef: AngularFirestoreCollection<any> = this._providersRef
     return itemsRef.snapshotChanges()
       .pipe(
         map(actions => {
@@ -31,14 +50,14 @@ export class BookingCoreProvider {
       )
   }
 
-  getProviders() {
-    const itemsRef = this.afsRef._providersRef
-    return itemsRef.snapshotChanges()
+  
+  getUserById(uid: string) {
+    const itemRef: AngularFirestoreDocument<any> = this._patientsRef.doc<CustomerId>(uid)
+    return itemRef.snapshotChanges()
       .pipe(
-        map(actions => {
-          return actions.map(a => {
-            return {id: a.payload.doc.id, ...a.payload.doc.data()}
-          })
+        take(1),
+        map(a => {
+          return { id: a.payload.id, ...a.payload.data() as Customer }
         })
       )
   }
@@ -46,8 +65,10 @@ export class BookingCoreProvider {
   private prepareAddBook(book: Book) {
     const prepare: Book = {
       cost: book.cost,
-      created_time: firebase.firestore.FieldValue.serverTimestamp(),
+      creationTime: firebase.firestore.FieldValue.serverTimestamp(),
+      duration: book.duration,
       customer: {
+        customerId: book.customer.customerId,
         name: book.customer.name,
         birthday: book.customer.birthday,
         phone: book.customer.phone,

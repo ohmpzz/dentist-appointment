@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'book-form',
@@ -9,6 +10,10 @@ export class BookFormComponent {
   bookForm: FormGroup
 
   constructor(private fb: FormBuilder) {
+  }
+
+  addBook() {
+
   }
 
   init() {
