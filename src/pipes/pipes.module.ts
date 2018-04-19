@@ -3,15 +3,17 @@ import { CurrencyBathPipe } from './currency-bath/currency-bath';
 import { MinuteThPipe } from './minute-th/minute-th';
 import { ProviderPipe } from './provider/provider';
 import { MonthThPipe } from './month-th/month-th';
+
+const PIPES = [
+        CurrencyBathPipe,
+        MinuteThPipe,
+        ProviderPipe,
+        MonthThPipe,
+    ]
+
 @NgModule({
-	declarations: [CurrencyBathPipe,
-    MinuteThPipe,
-    ProviderPipe,
-    MonthThPipe],
+	declarations: PIPES,
 	imports: [],
-	exports: [CurrencyBathPipe,
-    MinuteThPipe,
-    ProviderPipe,
-    MonthThPipe]
+	exports: PIPES
 })
 export class PipesModule {}
