@@ -74,10 +74,10 @@ export class BookingCoreProvider {
         phone: book.customer.phone,
         address: book.customer.address
       },
-      datatime: {
-        date: book.datatime.date,
-        start_time: book.datatime.start_time,
-        end_time: book.datatime.end_time
+      datetime: {
+        date: book.datetime.date,
+        start_time: book.datetime.start_time,
+        end_time: book.datetime.end_time
       },
       provider: {
         providerId: book.provider.providerId,

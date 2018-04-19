@@ -7,20 +7,22 @@ export interface Book {
     service?: string
     cost?: number
     customer?: {
+        customerId?: string
         name?: string
         birthday?: string
-        phone?: any
+        phone?: any 
         address?: string
     },
     status?: any
-    datatime?: {
+    duration?: any,
+    datetime?: {
         date?: any
         start_time?: any
-        end_time?: any
+        end_time?: any 
     },
-    created_time?: any
+    creationTime?: any
 }
 
 export interface Appointment extends Book {
-    bookId?: any
+    id?: string
 }
