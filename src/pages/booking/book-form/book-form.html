@@ -1,9 +1,3 @@
-<!--
-  Generated template for the BookFormPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,6 +7,53 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+
+  <ion-card>
+    <ion-item>
+      <h2>{{service?.name}}</h2>
+      <p>
+        <span>ผู้ให้บริการ: {{service?.canProvide | provider}}</span>
+        <span class="dotSplitter"> . </span>
+        <span>ระยะเวลา {{service?.duration | minuteTh}}</span>
+      </p>
+    </ion-item>
+  </ion-card>
+
+  <form [formGroup]="bookForm" (ngSubmit)="addBook()">
+    <div formGroupName="customer">
+      <ion-item>
+        <ion-label color="primary" stacked>ชื่อ-นามสกุล</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>เบอร์โทรศัพท์</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>    
+    </div>
+    <div formGroupName="provider">
+      <ion-item>
+        <ion-label color="primary">ผู้ให้บริการ</ion-label>
+        <ion-select interface="popover" formControlName="providerType" (ionChange)="pickPrice(bookForm.get('provider.providerType').value)">
+          <ion-option *ngFor="let item of providerOption; first as isFirst"  [value]="item.val">{{item.type}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item>
+      <ion-label color="dark" stacked>ราคา</ion-label>
+      <ion-input formControlName="cost" [readonly]="true"></ion-input>
+    </ion-item>
+    <div formGroupName="datetime">
+      <ion-item>
+        <ion-label>วันนัดหมาย</ion-label>
+        <ion-datetime displayFormat="DD-MM-YYYY" formControlName="date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>เวลา</ion-label>
+        <ion-datetime displayFormat="H.mm น." formControlName="start_time"></ion-datetime>
+      </ion-item>
+    </div>  
+    <button type="submit" ion-button color="primary">เพิ่ม</button>  
+  </form>
 
 </ion-content>

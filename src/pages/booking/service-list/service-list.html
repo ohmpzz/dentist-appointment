@@ -11,6 +11,52 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+  <ion-card>
+    <ion-item>
+      <div item-start>
+        <h2 style="font-size: 2rem">5</h2>
+        <p>ม.ย.</p>
+      </div>
+      <div item-start style="text-align: center; margin-right: 20px">
+        <h3>8.00</h3>
+        <p style="font-size: 1rem">60 - 80 นาที</p>
+      </div>
+      <div item-start>
+        <h3>ถอนฟัน</h3>
+      </div>
+      <div item-end>
+        <h3>รอตรวจ</h3>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <div item-start>
+        <h3 style="font-size: 1.5rem">ถอนฟัน</h3> <!-- display blockให้อยู่ในกรอบ -->
+        <p style="font-size: 1rem">ผู้ให้บริการ: หมอ, นักศึกษา</p>
+      </div>
+      <div item-start style="text-align: center;">
+        <h3>60 - 80 นาที</h3>
+      </div>
+      <div item-end style="text-align: center;">
+        <h3>฿ 60</h3>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-card class="card-hover" *ngFor="let item of serviceItems" (tap)="nextStep(item)">
+    <ion-item>
+      <div item-start>
+        <h3 style="font-size: 1.5rem">{{item.name}}</h3> <!-- display blockให้อยู่ในกรอบ -->
+        <p style="font-size: 1rem">ผู้ให้บริการ: {{item.canProvide | provider}}</p>
+      </div>
+      <div item-start style="text-align: center;">
+        <h3>{{item.duration | minuteTh}}</h3>
+      </div>
+      <div item-end style="text-align: center;">
+        <h3>{{item.price.student | currencyBath}}</h3>
+      </div>
+    </ion-item>
+  </ion-card>
 
 </ion-content>
