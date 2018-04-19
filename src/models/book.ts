@@ -1,11 +1,14 @@
 export interface Book {
+    status?: any
+    duration?: any
+    service?: string
+    creationTime?: any
+    cost?: number
     provider?: {
         providerId?: string
         name?: string
         providerType?: string
     },
-    service?: string
-    cost?: number
     customer?: {
         customerId?: string
         name?: string
@@ -13,14 +16,11 @@ export interface Book {
         phone?: any 
         address?: string
     },
-    status?: any
-    duration?: any,
     datetime?: {
         date?: any
         start_time?: any
         end_time?: any 
     },
-    creationTime?: any
 }
 
 export interface Appointment extends Book {

@@ -37,7 +37,6 @@ export class MyApp {
       this.guard.setAuthen = auth
       if(auth) {
         this.rootPage = APPOINTMENT_LIST_PAGE
-        
       } else {
         this.rootPage = PHONE_LOGIN_PAGE
       }

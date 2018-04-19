@@ -6,5 +6,5 @@ export interface Provider {
 }
 
 export interface ProviderId extends Provider {
-    providerId?: any
+    id?: any
 }

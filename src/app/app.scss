@@ -14,3 +14,28 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+.card-hover:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05) !important;
+    -webkit-box-shadow: 3px 20px 34px 3px rgba(0,0,0,0.1);
+    box-shadow: 6px 20px 34px 3px rgba(0,0,0,0.1) !important;
+    background: rgba(0, 0, 0, 0.1);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    will-change: auto;
+  
+  }
+  
+  .card-hover {
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    will-change: auto;
+  }
+
+  span.dotSplitter {
+    position: relative;
+    font-size: 19px;
+    margin: -5px 3px 0 3px;
+  }

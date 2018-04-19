@@ -8,7 +8,7 @@ export interface Customer extends AddCustomer {
 }
 
 export interface CustomerId extends Customer {
-    customer_id?: any
+    id?: any
 }
 
 export interface AddCustomer {
