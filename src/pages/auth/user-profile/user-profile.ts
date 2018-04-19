@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 import { AuthProvider } from '../auth.service';
 import { APPOINTMENT_LIST_PAGE } from '../../page-ref';
@@ -20,13 +21,11 @@ export class UserProfilePage {
     private fb: FormBuilder,
     private authService: AuthProvider
   ) {
-    this.init()
-    this.uid = this.navParams.get('uid')
-    
+    this.init()    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserProfilePage');
+    this.uid = this.navParams.get('uid')
   }
 
   ionViewCanEnter():boolean {
@@ -60,7 +59,8 @@ export class UserProfilePage {
 
     this.profileForm.patchValue({
       firstname: firstname,
-      lastname: lastname
+      lastname: lastname,
+      birthday: moment(this.profileForm.get('birthday').value).format()
     })
 
     this.authService.updateUser(this.uid, this.profileForm.value)
