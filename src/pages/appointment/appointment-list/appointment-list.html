@@ -27,23 +27,24 @@
       <div item-end>
         <h3>รอตรวจ</h3>
       </div>
+
     </ion-item>
   </ion-card>
-  <ion-card>
+  <ion-card *ngFor="let item of books$ | async" class="card-hover" (click)="onDetail(item)">
       <ion-item>
         <div item-start>
-          <h2 style="font-size: 2rem">5</h2>
-          <p>ม.ย.</p>
+          <h2 style="font-size: 2rem">{{item.datetime.date | date: 'MM'}}</h2>
+          <p>{{item.datetime.date | monthTh}}</p>
         </div>
         <div item-start style="text-align: center; margin-right: 20px">
-          <h3>8.00</h3>
-          <p style="font-size: 1rem">60 - 80 นาที</p>
+          <h3>{{item.datetime.start_time | date: 'H:MM'}}</h3>
+          <p style="font-size: 1rem">{{item.duration | minuteTh}}</p>
         </div>
         <div item-start>
-          <h3>ถอนฟัน</h3>
+          <h3>{{item.service}}</h3>
         </div>
         <div item-end>
-          <h3>รอตรวจ</h3>
+          <h3>{{item.status}}</h3>
         </div>
       </ion-item>
     </ion-card>
