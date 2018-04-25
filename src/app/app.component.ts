@@ -10,6 +10,10 @@ import {
   PHONE_LOGIN_PAGE,
   ADD_BOOK 
 } from '../pages/page-ref';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import { Customer } from '../models/patient';
+import { Observable } from 'rxjs/Observable';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -21,6 +25,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any
+  userInfo: any
 
   pages: Array<{title: string, component: any}>;
 
@@ -29,7 +34,8 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     private auth: AuthProvider,
-    private guard: AuthGuard
+    private guard: AuthGuard,
+    private afAuth: AngularFireAuth
   ) {
     this.initializeApp();
 
@@ -38,7 +44,8 @@ export class MyApp {
       if(auth) {
         this.rootPage = APPOINTMENT_LIST_PAGE
       } else {
-        this.rootPage = PHONE_LOGIN_PAGE
+        /* this.rootPage = PHONE_LOGIN_PAGE */
+        this.rootPage = APPOINTMENT_LIST_PAGE
       }
     })
     // used for an example of ngFor and navigation
@@ -47,6 +54,7 @@ export class MyApp {
       { title: 'นัดหมาย', component: ADD_BOOK}
     ];
 
+    this.getUserInfo()
   }
 
   initializeApp() {
@@ -62,6 +70,21 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  getUserInfo() {
+    /* this.afAuth.authState.subscribe(auth => {
+      console.log(auth)
+      this.auth.getUserByUserId(auth.uid).subscribe(user => {
+        this.userInfo = user
+        console.log(user)
+      })
+    }) */
+
+    this.auth.getUserByUserId('5kgK9HdJs2X1hBab8xR57aYTPOu2').subscribe(user => {
+      this.userInfo = user
+      console.log(user)
+    })
   }
 
   signOut() {

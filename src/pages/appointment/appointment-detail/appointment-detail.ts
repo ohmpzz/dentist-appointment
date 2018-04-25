@@ -12,6 +12,7 @@ import { Appointment } from '../../../models/book';
 })
 export class AppointmentDetailPage {
   appointmentInfo: Appointment
+  isDelete: boolean
 
   constructor(
     public navCtrl: NavController, 
@@ -23,10 +24,16 @@ export class AppointmentDetailPage {
   ionViewDidLoad() {
     console.log('[Appointment Detail]')
     this.appointmentInfo = this.navParams.get('data')
+    this.isDelete = false
   }
 
   ionViewCanEnter() {
    return this.guard.isLoggedIn && !!this.navParams.get('data')
+  }
+
+  onDelete() {
+    console.log('[onDelete] ', this.appointmentInfo.id)
+    this.isDelete = !this.isDelete
   }
 
 }

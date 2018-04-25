@@ -1,19 +1,22 @@
 import { Injectable, AnimationKeyframesSequenceMetadata } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map, take } from 'rxjs/operators';
 
-import {} from '../auth/auth.service';
+import { CustomerId } from '../../models/patient';
 
 @Injectable()
 export class AuthGuard {
   private _authState: any
-  private _userInfo: any
+  private _userInfo: CustomerId
+  public userInfo$: Observable<any> = null
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.afAuth.authState.subscribe(auth => {
       this._authState = auth
+      this.getUserInfo('5kgK9HdJs2X1hBab8xR57aYTPOu2')
     })
   }
 
@@ -22,7 +25,7 @@ export class AuthGuard {
   }
 
   get isLoggedIn(): boolean {
-    return !!this._authState
+    return /* !!this._authState */ true
   }
 
   get currentUser(): any {
@@ -34,12 +37,35 @@ export class AuthGuard {
   }
 
   get currentUserId(): string {
-    return this.isLoggedIn ? this._authState['uid'] : ''
+    /* return this.isLoggedIn ? this._authState['uid'] : '5kgK9HdJs2X1hBab8xR57aYTPOu2' */
+    return this.isLoggedIn ? '5kgK9HdJs2X1hBab8xR57aYTPOu2' : ''
+  }
+
+  get userInfo(): CustomerId {
+    return this._userInfo
   }
 
 
   public signOut() {
     return this.afAuth.auth.signOut()
+  }
+
+  private getUserInfo(uid: string) {
+    this.afs.doc('patients/patientInfo').collection<CustomerId>('patients').doc(uid)
+      .snapshotChanges().pipe(
+        take(1),
+        map(action => {
+          return {id: action.payload.id, ...action.payload.data() as CustomerId}
+        })
+      )
+      .subscribe(user => {
+        if(user) {
+          this._userInfo = user
+        } else {
+          this._userInfo = null
+        }
+        
+      })
   }
 
 

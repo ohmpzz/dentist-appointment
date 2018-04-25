@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { takeUntil } from 'rxjs/operators';
 import { sortPopoverPage } from './popover';
+import * as moment from 'moment'
 
 @IonicPage()
 @Component({
@@ -39,6 +40,7 @@ export class AppointmentListPage {
 
   ionViewDidLoad() {
     this.init()
+    console.log(moment("2018-04-29T06:28:00+07:00").locale("Th").fromNow())
   }
 
   ionViewCanEnter(): boolean {

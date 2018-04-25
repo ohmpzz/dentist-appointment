@@ -2,56 +2,28 @@
 
   <ion-navbar >
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" color="light"></ion-icon>
     </button>
 
-    <ion-title>นัดหมาย</ion-title>
+    <ion-title class="font-kanit">บริการ</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content >
-  <ion-card>
-    <ion-item>
-      <div item-start>
-        <h2 style="font-size: 2rem">5</h2>
-        <p>ม.ย.</p>
-      </div>
-      <div item-start style="text-align: center; margin-right: 20px">
-        <h3>8.00</h3>
-        <p style="font-size: 1rem">60 - 80 นาที</p>
-      </div>
-      <div item-start>
-        <h3>ถอนฟัน</h3>
-      </div>
-      <div item-end>
-        <h3>รอตรวจ</h3>
-      </div>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <div item-start>
-        <h3 style="font-size: 1.5rem">ถอนฟัน</h3> <!-- display blockให้อยู่ในกรอบ -->
-        <p style="font-size: 1rem">ผู้ให้บริการ: หมอ, นักศึกษา</p>
-      </div>
-      <div item-start style="text-align: center;">
-        <h3>60 - 80 นาที</h3>
-      </div>
-      <div item-end style="text-align: center;">
-        <h3>฿ 60</h3>
-      </div>
-    </ion-item>
-  </ion-card>
+<ion-content class="content">
   <ion-card class="card-hover" *ngFor="let item of serviceItems" (tap)="nextStep(item)">
     <ion-item>
       <div item-start>
-        <h3 style="font-size: 1.5rem">{{item.name}}</h3> <!-- display blockให้อยู่ในกรอบ -->
-        <p style="font-size: 1rem">ผู้ให้บริการ: {{item.canProvide | provider}}</p>
+          <ion-icon name="md-pulse" color="dark" style="font-size: 1.4em;"></ion-icon>
       </div>
-      <div item-start style="text-align: center;">
-        <h3>{{item.duration | minuteTh}}</h3>
+      <div item-start style="margin: 1.5rem 0 1.5rem 0;">
+        <h3 style="font-size: 1.5rem">{{item.name}}</h3> <!-- display blockให้อยู่ในกรอบ -->
+        <p style="font-size: 1.1rem">
+          <span>ผู้ให้บริการ: {{item.canProvide | provider}}</span>
+          <span class="dot"> . </span>
+          <span>{{item.duration | minuteTh}}</span>
+        </p>
       </div>
       <div item-end style="text-align: center;">
         <h3>{{item.price.student | currencyBath}}</h3>

@@ -64,7 +64,8 @@ export class ServiceListPage {
     .pipe(takeUntil(this._stop$))
     .subscribe(res => {
       console.log('Work')
-      this.serviceItems = this.mockData
+      console.log(res)
+      this.serviceItems = res
     })
   }
 }

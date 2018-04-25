@@ -25,3 +25,19 @@ export class ProviderPipe implements PipeTransform {
     return (provider[key]) ? this.data[key] : ''
   }
 }
+
+
+@Pipe({
+  name: 'providerName',
+})
+export class ProviderNamePipe implements PipeTransform {
+  data = {
+    dentist: 'หมอ',
+    student: 'นักศึกษา'
+  }
+  
+
+  transform(provider: any, ...args) {
+    return (!!this.data[provider]) ? this.data[provider] : ''
+  }
+}

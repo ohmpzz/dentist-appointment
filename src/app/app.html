@@ -1,11 +1,29 @@
 <ion-menu [content]="content">
-  <ion-header>
+  <!-- <ion-header>
     <ion-toolbar>
       <ion-title>เมนู</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
 
   <ion-content>
+    <ion-list *ngIf="userInfo"> 
+      <ion-item>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col col-5 >
+              <ion-avatar>
+                <img style="height: 80px; width: 80px;" src="../assets/imgs/avatar.jpg">
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+            <ion-col col-8 style="text-align: center;">
+              <h2 style="margin-top: 5px;">{{userInfo.fullname}}</h2>
+            </ion-col>
+          </ion-row>
+        </ion-grid>        
+      </ion-item>
+    </ion-list>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}

@@ -2,14 +2,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>appointment-detail</ion-title>
+    <ion-title>รายละเอียดนัดหมาย</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-  <ion-card *ngIf="appointmentInfo as item">
+<ion-content padding>
+  <!-- <ion-card *ngIf="appointmentInfo as item">
     <ion-item>
       <p>{{item.datetime | appointmentDate}}</p>
     </ion-item>
@@ -37,6 +37,63 @@
         <span>{{item.status}}</span>
       </p>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
+  <div *ngIf="appointmentInfo as item">
+    <ion-grid style="margin-bottom: 10px;">
+      <ion-row>
+        <ion-col col-2>
+            <ion-icon name="md-calendar" color="dark" style="font-size: 1.4em;"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <span style="font-size: 17px">
+            {{item.datetime | appointmentDate}}
+          </span>
+          <p>
+            {{item.datetime | appointmentFromNow }}
+          </p>
+            
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <ion-icon name="md-paper" color="dark" style="font-size: 1.4em;"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <span style="font-size: 17px">รายละเอียดนัดหมาย</span>
+          <span style="text-align: end">สถานะ: {{item.status}}</span>
+          <div>
+            <p>ผู้ให้บริการ {{item.provider.name}}, {{item.provider.providerType | providerName}}</p>
+          </div>
+          <div>
+            <p>บริการ {{item.service}}</p>
+          </div>
+          <div>
+            <p>ราคา {{item.cost}} บาท</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <hr />
+    <ion-grid>
+      <ion-row justify-content-end>
+        <ion-col col-4>
+          <a class="danger" (click)="onDelete()">
+            <span *ngIf="!isDelete" >ลบนัดหมาย</span>
+            <span *ngIf="isDelete">
+              <div class="la-ball-pulse-sync la-sm danger"> 
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </span>
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
 </ion-content>

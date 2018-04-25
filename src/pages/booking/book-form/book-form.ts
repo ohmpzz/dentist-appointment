@@ -6,6 +6,8 @@ import { Service } from '../../../models/service';
 import { Book } from '../../../models/book';
 import * as moment from 'moment'
 
+import { APPOINTMENT_LIST_PAGE } from '../../page-ref';
+
 import { AuthGuard } from '../../auth/auth.guard';
 import { BookingCoreProvider } from '../../../providers/booking/core.service';
 import { take } from 'rxjs/operators';
@@ -21,6 +23,8 @@ export class BookFormPage {
   bookForm: FormGroup
   providerOption = []
 
+  isAdd: boolean
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -32,14 +36,15 @@ export class BookFormPage {
   }
 
   ionViewCanEnter() {
-    console.log(this.navParams.get('data'))
-   return !!this.navParams.get('data') && this.guard.isLoggedIn
+    console.log('here', this.navParams.get('data'))
+   return (!!this.navParams.get('data') && this.guard.isLoggedIn)
   }
 
   ionViewDidEnter() {
     this.service = this.navParams.get('data')
     this.initUserInfo(this.guard.currentUserId)
-    console.log(moment('2018-04-19', 'YYYY-MM-DD').format())
+    this.initCanDidEnter()
+    this.isAdd = false
   }
 
   addBook() {
@@ -47,6 +52,8 @@ export class BookFormPage {
       // msg ..
       return false
     }
+
+    this.isAdd = true
     const book: Book = {
       cost: this.bookForm.get('cost').value,
       service: this.service.name,
@@ -69,6 +76,11 @@ export class BookFormPage {
     this.bookService.addBooking(book)
       .then(res => {
         console.log(res)
+        this.navCtrl.setRoot(APPOINTMENT_LIST_PAGE)
+          .then(done => {
+            console.log('[SetRoot] done!')
+          })
+          .catch(err => console.log('[SetRoot Err] ', err))
       })
       .catch((err) => console.log(err))
 
@@ -138,6 +150,19 @@ export class BookFormPage {
     }
 
     console.log(this.providerOption)
+  }
+
+  initCanDidEnter() {
+    const user: CustomerId = this.guard.userInfo
+    console.log(user)
+
+    this.bookForm.patchValue({
+      customer: {
+        name: user.fullname,
+        phone: user.phoneNumber
+      }
+    })
+
   }
 
 }

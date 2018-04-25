@@ -56,6 +56,15 @@ export class AuthProvider {
     return this._patientsRef.doc(uid).update(userInfo)
   }
 
+  getUserByUserId(uid) {
+    const itemRef = this.afs.doc('patients/patientInfo').collection<CustomerId>('patients').doc(uid)
+    return itemRef.snapshotChanges().pipe(
+      map(action => {
+        return {id: action.payload.id, ...action.payload.data() as CustomerId}
+      })
+    )
+  }
+
   public signOut() {
     return this.afAuth.auth.signOut()
   }

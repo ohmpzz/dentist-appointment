@@ -1,41 +1,53 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>book-form</ion-title>
+    <ion-title class="font-kanit">ข้อมูลนัดหมาย</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content >
+<ion-content padding>
 
-  <ion-card>
+  <ion-card class="card-hover" *ngIf="service as item" style="margin: 12px 0;width: unset;">
     <ion-item>
-      <h2>{{service?.name}}</h2>
-      <p>
-        <span>ผู้ให้บริการ: {{service?.canProvide | provider}}</span>
-        <span class="dotSplitter"> . </span>
-        <span>ระยะเวลา {{service?.duration | minuteTh}}</span>
-      </p>
+      <div item-start>
+          <ion-icon name="md-pulse" color="dark" style="font-size: 1.4em;"></ion-icon>
+      </div>
+      <div item-start style="margin: 1.5rem 0 1.5rem 0;">
+        <h3 style="font-size: 1.5rem">{{item.name}}</h3>
+        <p style="font-size: 1.1rem">
+          <span>ผู้ให้บริการ: {{item.canProvide | provider}}</span>
+          <span class="dot"> . </span>
+          <span>{{item.duration | minuteTh}}</span>
+        </p>
+      </div>
+      <div item-end style="text-align: center;">
+        <h3>{{item.price.student | currencyBath}}</h3>
+      </div>
     </ion-item>
   </ion-card>
 
+  
   <form [formGroup]="bookForm" (ngSubmit)="addBook()">
     <div formGroupName="customer">
-      <ion-item>
+      <ion-list>
+        <ion-item>
         <ion-label color="primary" stacked>ชื่อ-นามสกุล</ion-label>
         <ion-input formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>เบอร์โทรศัพท์</ion-label>
-        <ion-input formControlName="name"></ion-input>
-      </ion-item>    
+        <ion-input formControlName="phone"></ion-input>
+      </ion-item>  
+      </ion-list>
+        
     </div>
     <div formGroupName="provider">
       <ion-item>
-        <ion-label color="primary">ผู้ให้บริการ</ion-label>
+        <ion-label color="primary" stacked>ผู้ให้บริการ</ion-label>
         <ion-select interface="popover" formControlName="providerType" (ionChange)="pickPrice(bookForm.get('provider.providerType').value)">
-          <ion-option *ngFor="let item of providerOption; first as isFirst"  [value]="item.val">{{item.type}}</ion-option>
+          <ion-option *ngFor="let item of providerOption; first as isFirst" [value]="item.val">{{item.type}}</ion-option>
         </ion-select>
       </ion-item>
     </div>
@@ -45,15 +57,25 @@
     </ion-item>
     <div formGroupName="datetime">
       <ion-item>
-        <ion-label>วันนัดหมาย</ion-label>
+        <ion-label color="primary" stacked>วันนัดหมาย</ion-label>
         <ion-datetime displayFormat="DD-MM-YYYY" formControlName="date"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>เวลา</ion-label>
+        <ion-label color="primary" stacked>เวลา</ion-label>
         <ion-datetime displayFormat="H.mm น." formControlName="start_time"></ion-datetime>
       </ion-item>
-    </div>  
-    <button type="submit" ion-button color="primary">เพิ่ม</button>  
+    </div>
+    <p>กด "เพิ่มนัดหมาย" เท่ากับยอมรับเงื่อนไขและข้อตกลง. <a >รายละเอียด</a></p>  
+    <button type="submit" ion-button color="primary" block>
+      <span *ngIf="!isAdd">เพิ่มนัดหมาย</span>
+      <span *ngIf="isAdd" style="padding: 0 1.5rem 0 1.5rem">
+        <div class="la-ball-pulse-sync la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </span>
+    </button>  
   </form>
 
 </ion-content>

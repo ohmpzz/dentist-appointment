@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AppointmentDetailPage } from './appointment-detail';
-import { AppointmentDatePipe } from '../../../pipes/appointment-date/appointment-date';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
-    AppointmentDetailPage,
-    AppointmentDatePipe
+    AppointmentDetailPage
   ],
   imports: [
     IonicPageModule.forChild(AppointmentDetailPage),
+    PipesModule
   ],
 })
 export class AppointmentDetailPageModule {}
