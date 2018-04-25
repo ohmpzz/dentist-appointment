@@ -1,13 +1,12 @@
 import { APPOINTMENT_LIST_PAGE } from './../../page-ref';
-import { Component, AnimationKeyframe } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Firebase } from '@ionic-native/firebase';
 
 import { WindowService, AuthProvider } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
 import { PHONE_OTP_PAGE } from '../../page-ref';
-import * as firebase from 'firebase';
 import { first } from 'rxjs/operators';
 
 @IonicPage()
@@ -36,17 +35,18 @@ export class PhoneLoginPage {
     private win: WindowService,
     private authService: AuthProvider,
     private fb: FormBuilder,
-    private guard: AuthGuard
+    private guard: AuthGuard,
+    private firebase: Firebase
   ) {
     this.init()
     this.isSignIn = true
-    this.actionName = 'Sign In'
+    this.actionName = 'เข้าสู่ระบบ'
     this.signInMsg = null
     this.signUpMsg = null
   }
 
   ionViewDidLoad() {
-    this.windowRef = this.win.windowRef
+/*     this.windowRef = this.win.windowRef
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
       'size': 'invisible',
       'callback': (response) => {
@@ -56,7 +56,8 @@ export class PhoneLoginPage {
       }
     })
     this.windowRef.recaptchaVerifier.render()
-
+ */
+    
 
     
       /* .then((widgetId) => {
@@ -88,16 +89,18 @@ export class PhoneLoginPage {
       first()
     )
     .subscribe(res => {
-      console.log(res)
+      console.log(res[0])
       if(res.length > 0) {
         this.authService.phoneLogin(phoneNumber, appVerifier)
           .then((confirmationResult) => {
             this.windowRef.confirmationResult = confirmationResult
+            console.log('has user')
             console.log(confirmationResult)
             this.navCtrl.push(PHONE_OTP_PAGE)
           })
           .catch((error) => {
-            console.log(error)
+            console.log('err')
+            console.log(JSON.stringify(error))
           })
       } else {
         console.log('No data')
@@ -139,7 +142,7 @@ export class PhoneLoginPage {
   }
 
   onActionBtn(action: boolean) {
-    this.actionName = (action)? 'Sign In': 'Sign Up'
+    this.actionName = (action)? 'เข้าสู่ระบบ': 'สมัคร'
     return this.isSignIn = action
   }
 
@@ -158,6 +161,21 @@ export class PhoneLoginPage {
     this.navCtrl.setRoot(APPOINTMENT_LIST_PAGE)
       .then((result) => result ? console.log('OK') : console.log('Access denied - pls sign-in'))
       .catch(err => console.log(err))
+  }
+
+  testAuth() {
+    /* this.firebase.verifyPhoneNumber('+66800388836', 60)
+      .then(credential => {
+        console.log(credential);
+  
+      var verificationId = credential.verificationId;
+      })
+      .catch(err => console.log(err)) */
+
+      this.firebase.getToken()
+  .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+  .catch(error => console.error('Error getting token', error));
+    
   }
 
 

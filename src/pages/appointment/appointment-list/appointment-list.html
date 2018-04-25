@@ -5,6 +5,13 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>appointment</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only >
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -48,4 +55,15 @@
         </div>
       </ion-item>
     </ion-card>
+
+    <button ion-button color="primary" (click)="clickMe()">
+      <span *ngIf="!clicked">Click Me</span>
+      <span *ngIf="clicked" style="padding: 0 1.5rem 0 1.5rem">
+        <div class="la-ball-pulse-sync la-sm">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </span>
+    </button>
 </ion-content>

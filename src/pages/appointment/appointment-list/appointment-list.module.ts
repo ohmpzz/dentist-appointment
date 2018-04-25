@@ -3,12 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { AppointmentListPage } from './appointment-list';
 import { AuthGuard } from '../../auth/auth.guard';
 import { AppointmentCoreProvider } from '../../../providers/appointment/core.service';
+import { sortPopoverPage } from './popover';
 
 import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
     AppointmentListPage,
+    sortPopoverPage
   ],
   imports: [
     IonicPageModule.forChild(AppointmentListPage),

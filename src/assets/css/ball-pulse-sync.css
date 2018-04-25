@@ -1,59 +1,8 @@
-// http://ionicframework.com/docs/theming/
-
-
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
-
-@font-face {
-    font-family: 'kanit-medium';
-    src: url('../assets/fonts/Kanit/Kanit-Medium.ttf');
- }
-
-@font-face {
-    font-family: 'kanit-regular';
-    src: url('../assets/fonts/Kanit/Kanit-Regular.ttf');
- }
-
-
-.card-hover:hover {
-    -webkit-transform: scale(1.05);
-    transform: scale(1.05) !important;
-    -webkit-box-shadow: 3px 20px 34px 3px rgba(0,0,0,0.1);
-    box-shadow: 6px 20px 34px 3px rgba(0,0,0,0.1) !important;
-    background: rgba(0, 0, 0, 0.1);
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    will-change: auto;
-  
-  }
-  
-  .card-hover {
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    will-change: auto;
-  }
-
-  span.dotSplitter {
-    position: relative;
-    font-size: 19px;
-    margin: -5px 3px 0 3px;
-  }
-
-
-// Loading Awesome
-// ------------------------------------------------------
-
+/*!
+ * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+ * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+ * Licensed under MIT
+ */
 .la-ball-pulse-sync,
 .la-ball-pulse-sync > div {
     position: relative;
@@ -213,35 +162,4 @@
              -o-transform: translateY(0);
                 transform: translateY(0);
     }
-}
-
-ion-title {
-    background: linear-gradient(to right, #00C6BF , #00AECC);
-}
-
-/* .item.item-input {
-    background-color: transparent;
-}
- */
-/* .item {
-    background-color: rgba(255, 255, 255, 0.2);
-}
- */
-
-// background: linear-gradient(to right, #00C6BF , #00AECC);
-
-.bgLogin {
-    background-image: url('../assets/imgs/dental-wallpaper.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
-}
-
-.rsu-logo {
-    background-image: url('../assets/imgs/rsu-logo-01.png');
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: 100px ;
-    height: 150px;
-    margin: 1.5rem;
 }

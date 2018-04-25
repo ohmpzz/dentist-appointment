@@ -1,25 +1,23 @@
 <ion-header >
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
+  <!-- <ion-navbar >
+    <ion-title >Login</ion-title>
+  </ion-navbar> -->
 
 </ion-header>
 
 
-<ion-content padding >
-  <div >
-
+<ion-content padding class="bgLogin">
+    <div class="rsu-logo" style="margin-top: 10vh;"></div>
+  <div text-center style="margin-bottom: 2vh;">
+    <h2 style="font-family: 'kanit-regular';">นัดหมายทำฟัน</h2>
+    <p style="font-family: 'kanit-regular';margin-top: -8px;">มหาวิทยาลัยรังสิต</p>
   </div>
-  <ion-item >
-    <button ion-button (click)="onActionBtn(true)">Sign In</button>
-    <button ion-button (click)="onActionBtn(false)">Sign Up</button>
-  </ion-item>
 
   <div *ngIf="isSignIn">
     <form [formGroup]="signInForm" novalidate>
       <ion-item>
-        <ion-label color="primary" floating>Phone Number</ion-label>
+        <ion-label color="primary" stacked>หมายเลขโทรศัพท์</ion-label>
         <ion-input formControlName="phoneNumber"></ion-input>
       </ion-item>
       <div *ngIf="isSignInInvalid">
@@ -34,11 +32,11 @@
   <div *ngIf="!isSignIn">
     <form [formGroup]="signUpForm" novalidate>
       <ion-item>
-        <ion-label color="dark" stacked>Email</ion-label>
+        <ion-label color="dark" stacked>อีเมล</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="dark" stacked>Phone</ion-label>
+        <ion-label color="dark" stacked>หมายเลขโทรศัพท์</ion-label>
         <ion-input formControlName="phoneNumber"></ion-input>
       </ion-item>
       <div *ngIf="!!signUpMsg">
@@ -46,7 +44,14 @@
       </div>
     </form>
   </div>  
-  <button id="sign-in-button" ion-button >{{actionName}}</button>  
-  <button ion-button  (click)="test()">test</button>
+  <br/>
+  <button id="sign-in-button" ion-button block >{{actionName}}</button>  
+  <p *ngIf="isSignIn" text-center>ยังไม่มีบัญชี? <a (click)="onActionBtn(false)">สมัคร</a></p>
+  <p *ngIf="!isSignIn" text-center>มีบัญชีแล้ว? <a (click)="onActionBtn(true)">เข้าสู่ระบบ</a></p>
+  <button color="dark" ion-button block  (click)="testAuth()">test</button>
 
+ <!-- <ion-item  >
+    <button ion-button (click)="onActionBtn(true)">Sign In</button>
+    <button ion-button (click)="onActionBtn(false)">Sign Up</button>
+  </ion-item> -->
 </ion-content>

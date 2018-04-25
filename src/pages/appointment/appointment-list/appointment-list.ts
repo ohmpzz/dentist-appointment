@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { 
+  IonicPage, 
+  NavController, 
+  NavParams, 
+  PopoverController 
+} from 'ionic-angular';
+
 import { AuthGuard } from '../../auth/auth.guard';
 import { AppointmentCoreProvider } from '../../../providers/appointment/core.service';
 
@@ -9,6 +15,7 @@ import { APPOINTMENT_DETAIT_PAGE } from '../../page-ref';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { takeUntil } from 'rxjs/operators';
+import { sortPopoverPage } from './popover';
 
 @IonicPage()
 @Component({
@@ -20,12 +27,14 @@ export class AppointmentListPage {
   private book: Appointment
   private _stop$ = new Subject<any>()
 
+  clicked: boolean = false
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private guard: AuthGuard,
-    private appointmentService: AppointmentCoreProvider
+    private appointmentService: AppointmentCoreProvider,
+    public popoverCtrl: PopoverController
   ) { }
 
   ionViewDidLoad() {
@@ -60,6 +69,10 @@ export class AppointmentListPage {
 
   sort(action) {
     this.books$ = this.appointmentService.sortByAction(this.books$, '')
+  }
+
+  clickMe() {
+    return this.clicked = !this.clicked
   }
 
 }
