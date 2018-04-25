@@ -84,30 +84,43 @@ export class PhoneLoginPage {
   
     this.phoneNumber.number = this.signInForm.get('phoneNumber').value
     const phoneNumber = this.phoneNumber.e164
-    const appVerifier = this.windowRef.recaptchaVerifier
-    this.authService.getUserByNumber(phoneNumber).pipe(
-      first()
-    )
-    .subscribe(res => {
-      console.log(res[0])
-      if(res.length > 0) {
-        this.authService.phoneLogin(phoneNumber, appVerifier)
-          .then((confirmationResult) => {
-            this.windowRef.confirmationResult = confirmationResult
-            console.log('has user')
-            console.log(confirmationResult)
-            this.navCtrl.push(PHONE_OTP_PAGE)
-          })
-          .catch((error) => {
-            console.log('err')
-            console.log(JSON.stringify(error))
-          })
-      } else {
-        console.log('No data')
-        this.signInMsg = 'ไม่พบบัญชีของคุณ'
-        // say: No account or something
-      }
-    })
+    let appVerifier
+
+    this.firebase.verifyPhoneNumber(this.phoneNumber.number, 60)
+      .then(credential => {
+        console.log(credential);
+  
+      var verificationId = credential.verificationId;
+        appVerifier = credential.verificationId;
+
+        this.authService.getUserByNumber(phoneNumber).pipe(
+          first()
+        )
+        .subscribe(res => {
+          console.log(res[0])
+          if(res.length > 0) {
+            this.authService.phoneLogin(phoneNumber, appVerifier)
+              .then((confirmationResult) => {
+                this.windowRef.confirmationResult = confirmationResult
+                console.log('has user')
+                console.log(confirmationResult)
+                this.navCtrl.push(PHONE_OTP_PAGE)
+              })
+              .catch((error) => {
+                console.log('err')
+                console.log(JSON.stringify(error))
+              })
+          } else {
+            console.log('No data')
+            this.signInMsg = 'ไม่พบบัญชีของคุณ'
+            // say: No account or something
+          }
+        })
+
+
+
+      })
+      .catch(err => console.log(err))
   }
 
   onSignUpSubmit() {
@@ -164,18 +177,22 @@ export class PhoneLoginPage {
   }
 
   testAuth() {
-    /* this.firebase.verifyPhoneNumber('+66800388836', 60)
+    this.firebase.verifyPhoneNumber('+66800388836', 60)
       .then(credential => {
         console.log(credential);
   
       var verificationId = credential.verificationId;
       })
-      .catch(err => console.log(err)) */
+      .catch(err => console.log(err))
 
-      this.firebase.getToken()
+      /* this.firebase.getToken()
   .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
-  .catch(error => console.error('Error getting token', error));
+  .catch(error => console.error('Error getting token', error)); */
     
+  }
+
+  onAct() {
+    return (this.isSignIn) ? this.onSignInSubmit() : this.onSignUpSubmit()
   }
 
 

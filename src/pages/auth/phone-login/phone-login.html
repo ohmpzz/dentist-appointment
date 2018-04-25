@@ -45,7 +45,7 @@
     </form>
   </div>  
   <br/>
-  <button id="sign-in-button" ion-button block >{{actionName}}</button>  
+  <button id="sign-in-button" (click)="onAct()" ion-button block >{{actionName}}</button>  
   <p *ngIf="isSignIn" text-center>ยังไม่มีบัญชี? <a (click)="onActionBtn(false)">สมัคร</a></p>
   <p *ngIf="!isSignIn" text-center>มีบัญชีแล้ว? <a (click)="onActionBtn(true)">เข้าสู่ระบบ</a></p>
   <button color="dark" ion-button block  (click)="testAuth()">test</button>
