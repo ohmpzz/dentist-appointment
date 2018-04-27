@@ -32,6 +32,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "angularfire2": "^5.0.0-rc.6.0",
     "bootstrap": "^4.1.0",
+    "cordova-android": "6.4.0",
     "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-firebase": "^1.0.0",
@@ -62,7 +63,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

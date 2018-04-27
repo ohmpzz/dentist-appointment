@@ -177,18 +177,19 @@ export class PhoneLoginPage {
   }
 
   testAuth() {
-    this.firebase.verifyPhoneNumber('+66800388836', 60)
+    /* this.firebase.verifyPhoneNumber('+66800388836', 60)
       .then(credential => {
         console.log(credential);
   
       var verificationId = credential.verificationId;
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err)) */
 
-      /* this.firebase.getToken()
+     /*  this.firebase.getToken()
   .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
-  .catch(error => console.error('Error getting token', error)); */
-    
+  .catch(error => console.error('Error getting token', error));
+     */
+    this.navCtrl.setRoot(APPOINTMENT_LIST_PAGE)
   }
 
   onAct() {

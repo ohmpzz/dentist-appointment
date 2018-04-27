@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AppointmentDetailPage } from './appointment-detail';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { AppointmentCoreProvider } from '../../../providers/appointment/core.service';
 
 @NgModule({
   declarations: [
@@ -11,5 +12,8 @@ import { PipesModule } from '../../../pipes/pipes.module';
     IonicPageModule.forChild(AppointmentDetailPage),
     PipesModule
   ],
+  providers: [
+    AppointmentCoreProvider
+  ]
 })
 export class AppointmentDetailPageModule {}

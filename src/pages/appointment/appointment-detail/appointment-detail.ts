@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AuthGuard } from '../../auth/auth.guard';
+import { AppointmentCoreProvider } from '../../../providers/appointment/core.service';
 
 import { Appointment } from '../../../models/book';
 
@@ -17,7 +18,8 @@ export class AppointmentDetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private guard: AuthGuard
+    private guard: AuthGuard,
+    private appointmentService: AppointmentCoreProvider
   ) {
   }
 
@@ -34,6 +36,10 @@ export class AppointmentDetailPage {
   onDelete() {
     console.log('[onDelete] ', this.appointmentInfo.id)
     this.isDelete = !this.isDelete
+    this.appointmentService.deleteAppointmentById(this.appointmentInfo.id)
+      .then(() => {
+        this.navCtrl.pop()
+      })
   }
 
 }

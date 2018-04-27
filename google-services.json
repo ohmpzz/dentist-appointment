@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1055974301623",
+    "firebase_url": "https://dentist-appointment.firebaseio.com",
+    "project_id": "dentist-appointment",
+    "storage_bucket": "dentist-appointment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055974301623:android:ab61909d62dd7edd",
+        "android_client_info": {
+          "package_name": "com.ohm.dentist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055974301623-a28vh6bgap2se7ipi9u1019s59lc4tq6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ohm.dentist",
+            "certificate_hash": "e6de2424154392e90ae2e3848a7857119ebb5ac5"
+          }
+        },
+        {
+          "client_id": "1055974301623-7rj3eoq113u0vjh2c6i3dlc274n4vcq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYFny3OLLyxVQaBLTwUHlRCgnc28pOhf8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055974301623-7rj3eoq113u0vjh2c6i3dlc274n4vcq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1055974301623-ubame6rfh9rurghu601qrgqth1ekuk3k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ohm.dentist"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
